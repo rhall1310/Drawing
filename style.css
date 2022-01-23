@@ -1,0 +1,65 @@
+html {
+  box-sizing: border-box;
+  margin: 0;
+  overflow: hidden;
+}
+
+body {
+  box-sizing: border-box;
+  margin: 0;
+}
+
+canvas {
+  height: 100vh;
+  width: 100vw;
+}
+
+nav {
+  background-color: silver;
+  min-height: 2em;
+  display: flex;
+  position: fixed;
+}
+
+.colours {
+  display: flex;
+  flex-wrap: wrap;
+  width: 4em;
+}
+
+.colour {
+  width: 1em;
+  height: 1em;
+  margin: 0.2em;
+  border-radius: 0.2em;
+}
+
+.brushes {
+  display: flex;
+  align-items: center;
+  padding: 0.2em;
+}
+
+.rounded,
+.square {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 0.1em;
+}
+
+.brush {
+  margin: 0.3em auto 0 auto;
+}
+
+.active {
+  border: 2px purple solid;
+}
+
+button {
+  border-radius: 1em;
+  max-height: 3em;
+  margin: auto;
+  padding: 0.2em;
+}

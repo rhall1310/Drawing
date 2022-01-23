@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Drawing</title>
+  </head>
+  <body>
+    <nav>
+      <div class="colours">
+        <div
+          class="colour"
+          data-colour="#000"
+          style="background-color: #000"
+        ></div>
+        <div
+          class="colour"
+          data-colour="#d10000"
+          style="background-color: #d10000"
+        ></div>
+        <div
+          class="colour"
+          data-colour="#00d134"
+          style="background-color: #00d134"
+        ></div>
+        <div
+          class="colour"
+          data-colour="#155fff"
+          style="background-color: #155fff"
+        ></div>
+        <div
+          class="colour"
+          data-colour="#fbff00"
+          style="background-color: #fbff00"
+        ></div>
+        <div
+          class="colour"
+          data-colour="#ffffff"
+          style="background-color: #ffffff"
+        ></div>
+      </div>
+      <div class="brushes">
+        <div class="rounded">
+          <div
+            class="brush"
+            data-brush="round"
+            data-size="4"
+            style="
+              background-color: black;
+              height: 0.6em;
+              width: 0.6em;
+              border-radius: 100%;
+            "
+          ></div>
+          <div
+            class="brush"
+            data-brush="round"
+            data-size="8"
+            style="
+              background-color: black;
+              height: 1em;
+              width: 1em;
+              border-radius: 100%;
+            "
+          ></div>
+          <div
+            class="brush"
+            data-brush="round"
+            data-size="16"
+            style="
+              background-color: black;
+              height: 2em;
+              width: 2em;
+              border-radius: 100%;
+            "
+          ></div>
+        </div>
+        <div class="square">
+          <div
+            class="brush"
+            data-brush="square"
+            data-size="4"
+            style="background-color: black; height: 0.6em; width: 0.6em"
+          ></div>
+          <div
+            class="brush"
+            data-brush="square"
+            data-size="8"
+            style="background-color: black; height: 1em; width: 1em"
+          ></div>
+          <div
+            class="brush"
+            data-brush="square"
+            data-size="16"
+            style="background-color: black; height: 2em; width: 2em"
+          ></div>
+        </div>
+      </div>
+      <button id="save">Save</button>
+      <button id="clear">Clear</button>
+    </nav>
+    <main>
+      <canvas id="canvas"></canvas>
+    </main>
+    <footer></footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>
