@@ -81,6 +81,7 @@ clearBtn.addEventListener("click", () => {
 });
 
 // Save button
+
 let saveBtn = document.getElementById("save");
 saveBtn.addEventListener("click", () => {
   let data = canvas.toDataURL("imag/png");
