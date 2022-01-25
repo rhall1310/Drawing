@@ -32,6 +32,7 @@ nav {
   height: 1em;
   margin: 0.2em;
   border-radius: 0.2em;
+  cursor: pointer;
 }
 
 .brushes {
@@ -51,6 +52,7 @@ nav {
 
 .brush {
   margin: 0.3em auto 0 auto;
+  cursor: pointer;
 }
 
 .active {
@@ -62,4 +64,5 @@ button {
   max-height: 3em;
   margin: auto;
   padding: 0.2em;
+  cursor: pointer;
 }

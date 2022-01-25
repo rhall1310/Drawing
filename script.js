@@ -9,6 +9,8 @@ canvas.width = window.innerWidth;
 
 window.addEventListener("load", function () {
   let draw = false;
+  toggleItem(document.querySelectorAll(".colour"));
+  toggleItem(document.querySelectorAll(".brush"));
   function drawstart(event) {
     context.beginPath();
     context.moveTo(
@@ -57,7 +59,6 @@ colours = Array.from(colours);
 colours.forEach((colour) => {
   colour.addEventListener("click", () => {
     context.strokeStyle = colour.dataset.colour;
-    toggleItem(document.querySelectorAll(".colour"));
   });
 });
 
@@ -69,7 +70,6 @@ brushes.forEach((brush) => {
   brush.addEventListener("click", () => {
     context.lineCap = brush.dataset.brush;
     context.lineWidth = brush.dataset.size;
-    toggleItem(document.querySelectorAll(".brush"));
   });
 });
 
@@ -86,8 +86,7 @@ saveBtn.addEventListener("click", () => {
   let data = canvas.toDataURL("imag/png");
   let a = document.createElement("a");
   a.href = data;
-  // what ever name you specify here
-  // the image will be saved as that name
+
   a.download = "drawing.png";
   a.click();
 });
@@ -95,17 +94,16 @@ saveBtn.addEventListener("click", () => {
 // Toggle class
 
 function toggleItem(elem) {
-  for (var i = 0; i < elem.length; i++) {
-    elem[i].addEventListener("click", function (e) {
-      var current = this;
-      for (var i = 0; i < elem.length; i++) {
+  for (let i = 0; i < elem.length; i++) {
+    elem[i].addEventListener("click", function () {
+      let current = this;
+      for (let i = 0; i < elem.length; i++) {
         if (current != elem[i]) {
           elem[i].classList.remove("active");
         } else {
           current.classList.add("active");
         }
       }
-      e.preventDefault();
     });
   }
 }
