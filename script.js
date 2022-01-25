@@ -1,41 +1,53 @@
 // Set up canvas
 
 const canvas = document.getElementById("canvas");
+const context = canvas.getContext("2d");
 canvas.height = window.innerHeight;
 canvas.width = window.innerWidth;
 
-const ctx = canvas.getContext("2d");
+// Drawing based on mouse or touch
 
-let prevX = null;
-let prevY = null;
-
-ctx.lineWidth = 4;
-ctx.lineCap = "round";
-
-let draw = false;
-
-// Set draw on mouse up/down
-window.addEventListener("mousedown", (e) => (draw = true));
-
-window.addEventListener("mouseup", (e) => (draw = false));
-
-window.addEventListener("mousemove", (e) => {
-  if (prevX == null || prevY == null || !draw) {
-    prevX = e.clientX;
-    prevY = e.clientY;
-    return;
+window.addEventListener("load", function () {
+  let draw = false;
+  function drawstart(event) {
+    context.beginPath();
+    context.moveTo(
+      event.pageX - canvas.offsetLeft,
+      event.pageY - canvas.offsetTop
+    );
+    draw = true;
+  }
+  function drawmove(event) {
+    if (!draw) return;
+    context.lineTo(
+      event.pageX - canvas.offsetLeft,
+      event.pageY - canvas.offsetTop
+    );
+    context.stroke();
+  }
+  function drawend(event) {
+    if (!draw) return;
+    drawmove(event);
+    draw = false;
+  }
+  function touchstart(event) {
+    drawstart(event.touches[0]);
+  }
+  function touchmove(event) {
+    drawmove(event.touches[0]);
+    event.preventDefault();
+  }
+  function touchend(event) {
+    drawend(event.changedTouches[0]);
   }
 
-  let currentX = e.clientX;
-  let currentY = e.clientY;
+  canvas.addEventListener("touchstart", touchstart, false);
+  canvas.addEventListener("touchmove", touchmove, false);
+  canvas.addEventListener("touchend", touchend, false);
 
-  ctx.beginPath();
-  ctx.moveTo(prevX, prevY);
-  ctx.lineTo(currentX, currentY);
-  ctx.stroke();
-
-  prevX = currentX;
-  prevY = currentY;
+  canvas.addEventListener("mousedown", drawstart, false);
+  canvas.addEventListener("mousemove", drawmove, false);
+  canvas.addEventListener("mouseup", drawend, false);
 });
 
 // Colour choices
@@ -44,8 +56,8 @@ let colours = document.querySelectorAll(".colour");
 colours = Array.from(colours);
 colours.forEach((colour) => {
   colour.addEventListener("click", () => {
-    ctx.strokeStyle = colour.dataset.colour;
-    colour.classList.add("active");
+    context.strokeStyle = colour.dataset.colour;
+    toggleItem(document.querySelectorAll(".colour"));
   });
 });
 
@@ -55,8 +67,9 @@ let brushes = document.querySelectorAll(".brush");
 brushes = Array.from(brushes);
 brushes.forEach((brush) => {
   brush.addEventListener("click", () => {
-    ctx.lineCap = brush.dataset.brush;
-    ctx.lineWidth = brush.dataset.size;
+    context.lineCap = brush.dataset.brush;
+    context.lineWidth = brush.dataset.size;
+    toggleItem(document.querySelectorAll(".brush"));
   });
 });
 
@@ -64,7 +77,7 @@ brushes.forEach((brush) => {
 
 let clearBtn = document.getElementById("clear");
 clearBtn.addEventListener("click", () => {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  context.clearRect(0, 0, canvas.width, canvas.height);
 });
 
 // Save button
@@ -78,3 +91,21 @@ saveBtn.addEventListener("click", () => {
   a.download = "drawing.png";
   a.click();
 });
+
+// Toggle class
+
+function toggleItem(elem) {
+  for (var i = 0; i < elem.length; i++) {
+    elem[i].addEventListener("click", function (e) {
+      var current = this;
+      for (var i = 0; i < elem.length; i++) {
+        if (current != elem[i]) {
+          elem[i].classList.remove("active");
+        } else {
+          current.classList.add("active");
+        }
+      }
+      e.preventDefault();
+    });
+  }
+}
